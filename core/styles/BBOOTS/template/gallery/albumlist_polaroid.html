@@ -1,12 +1,21 @@
 <!-- BEGIN albumrow -->
 	<!-- IF (albumrow.S_IS_CAT and not albumrow.S_FIRST_ROW) or albumrow.S_NO_CAT -->
-		<span class="clear"></span>
+     </table>
+	 </div>
 	<!-- ENDIF -->
 
 	<!-- IF albumrow.S_IS_CAT or albumrow.S_FIRST_ROW or albumrow.S_NO_CAT  -->
-		<h2<!-- IF albumrow.S_FIRST_ROW --> class="invade-linklist"<!-- ENDIF -->><!-- IF albumrow.S_IS_CAT --><a href="{albumrow.U_VIEWALBUM}">{albumrow.ALBUM_NAME}</a><!-- ELSE -->{L_ALBUM}<!-- ENDIF --></h2>
-		<div class="container">
-        <div class="row">
+	<div class="panel panel-default">
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+		<thead>
+			<tr>
+				<th data-class="expand"><!-- IF albumrow.S_IS_CAT --><i class="fa fa-list-ol"></i> <a href="{albumrow.U_VIEWALBUM}">{albumrow.ALBUM_NAME}</a><!-- ELSE --><i class="fa fa-list"></i> {L_ALBUM}<!-- ENDIF --></th>
+				<th class="large80" data-hide="phone"><i class="fa fa-bar-chart-o"></i> {L_IMAGES}</th>
+				<th data-hide="phone"><i class="fa fa-picture-o"></i> Thumbnail</th>
+			    <th class="large-gallery" data-hide="phone"><i class="fa fa-comments"></i> {L_LAST_IMAGE}</th>
+			</tr>
+		</thead>
+		<tbody>
 	<!-- ENDIF -->
 
 	<!-- IF not albumrow.S_IS_CAT -->
@@ -61,16 +70,13 @@
 	<!-- ENDIF -->
 
 	<!-- IF albumrow.S_LAST_ROW -->
-		</div>
-		</div>
+		</tbody>
+	</table>
+	</div>
 	<!-- ENDIF -->
 
 <!-- BEGINELSE -->
-	<div class="panel">
-		<div class="inner">
-			<strong>{L_NO_ALBUMS}</strong>
-		</div>
+	<div class="well">
+		<strong>{L_NO_ALBUMS}</strong>
 	</div>
 <!-- END albumrow -->
-
-

@@ -1,219 +1,299 @@
 <!-- INCLUDE gallery/gallery_header.html -->
-
+<script>
+head.load("{T_THEME_PATH}/vendors/jupload.min.js");
+</script>
 <!-- IF S_ALBUM_SELECT -->
 <br />
 <form method="post" id="mcp" action="{S_ALBUM_ACTION}">
-<div class="panel" id="message">
-	<div class="inner"><span class="corners-top"><span></span></span>
+<div class="well" id="message">
 		<h3>{L_UPLOAD_IMAGE}</h3>
 
-		<p>
-			{L_SELECT_ALBUM}: <select name="album_id">{S_ALBUM_SELECT}</select>
-			<input class="button2" type="submit" name="move" value="{L_SUBMIT}" />
-			{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
-		</p>
-	<span class="corners-bottom"><span></span></span></div>
+		<div class="control-group">
+		 <label class="control-label" for="album_id">{L_SELECT_ALBUM}{L_COLON}</label>
+		 <div class="controls controls-row">
+		  <div class="input-group">
+		  <select class="selectpicker" data-container="body" name="album_id">{S_ALBUM_SELECT}</select>
+		 <span class="input-group-btn"> 
+		   <button class="btn btn-default" type="submit" name="move" value="{L_SUBMIT}">{L_SUBMIT}</button>
+		 </span>
+		 </div>
+		 </div>
+		</div>
+		{S_FORM_TOKEN}{S_HIDDEN_FIELDS}
 </div>
 </form>
 <!-- ELSEIF S_UPLOAD -->
+<script>
+	var num_displayed_fields = 1;
+	var limit_fields = {S_UPLOAD_LIMIT};
+	function add_field()
+	{
+		if (num_displayed_fields < limit_fields)
+		{
+			dE('upload_field_' + num_displayed_fields);
+			num_displayed_fields++;
+			if (num_displayed_fields == limit_fields)
+			{
+				dE('add_field_link', -1);
+			}
+		}
+	}
+</script>
 
-<h2><a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a></h2>
+<div class="side-segment"><h3><a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a></h3></div>
 
-<form id="postform" action="{S_ALBUM_ACTION}" method="post" enctype="multipart/form-data" data-url="{S_ALBUM_ACTION}">
-<div class="panel" id="postingbox" style="position: relative;">
-<div id="covverall" data-url="{S_ALBUM_ACTION}">
-	<div class="dropzone">
-		<span>{L_GALLERY_DROP}</span>
-	</div>
-</div>
-<div>
-	<div class="inner"><span class="corners-top"><span></span></span>
+<form id="postform" action="{S_ALBUM_ACTION}" method="post" enctype="multipart/form-data">
+
+<div class="well" id="postingbox">
+	<div class="clearfix">
 		<h3>{L_UPLOAD_IMAGE}</h3>
-		<fieldset class="fields1">
-			<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
-
+		<fieldset>
+		
+		<!-- IF ERROR -->
+        <div class="alert alert-error fade in">
+			<button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+			<strong>Attention!</strong>{ERROR}
+		</div>
+		<!-- ENDIF -->
+		
 			<!-- IF CAPTCHA_TEMPLATE -->
 				<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
 			<!-- ENDIF -->
-
+        
 			<!-- IF not S_USER_LOGGED_IN -->
-			<dl>
-				<dt><label for="username">{L_USERNAME}:</label></dt>
-				<dd id="username"><input class="inputbox autowidth" type="text" tabindex="1" name="username" value="{USERNAME}" size="60" maxlength="32" /></dd>
-			</dl>
+			<label for="username">{L_USERNAME}{L_COLON}</label>
+			<input class="inputbox autowidth" type="text" tabindex="1" name="username" value="{USERNAME}" size="60" maxlength="32" />
 			<!-- ENDIF -->
-			<!-- IF S_COMMENTS_ENABLED -->
-				<dl>
-					<dt><label for="allow_comments">{L_COMMENTS}:</label></dt>
-					<dd><input type="checkbox" class="checkbox" name="allow_comments" id="allow_comments"<!-- IF S_ALLOW_COMMENTS --> checked="checked"<!-- ENDIF --> value="1" /> <label for="allow_comments">{L_ALLOW_COMMENTS}</label></dd>
-				</dl>
-			<!-- ENDIF -->
-			<!-- IF CAPTCHA_TEMPLATE or not S_USER_LOGGED_IN or S_COMMENTS_ENABLED --><hr /><!-- ENDIF -->
-			<dl>
-				<dt><label>{L_MAX_DIMENSIONS}:</label></dt>
-				<dd>{L_FILE_SIZE}: {S_MAX_FILESIZE}</dd>
-				<dd>{L_IMAGE_WIDTH}: {S_MAX_WIDTH}</dd>
-				<dd>{L_IMAGE_HEIGHT}: {S_MAX_HEIGHT}</dd>
-			</dl>
-			<dl>
-				<dt><label>{L_ALLOWED_FILETYPES}:</label></dt>
-				<dd>{S_ALLOWED_FILETYPES}</dd>
-			</dl>
-			<hr />
-			<!-- BEGIN upload_image -->
-				<dl id="upload_field_{upload_image.S_ROW_COUNT}" <!-- IF not upload_image.S_FIRST_ROW --> style="display: none;"<!-- ENDIF -->>
+			
+			
+    
+		<div class="btn-group">
+			<a href="<!-- IF S_IS_LOCKED --> <!-- ELSE -->{U_UPLOAD_IMAGE}<!-- ENDIF -->" title="<!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF -->" class="btn btn-sm btn-default <!-- IF S_IS_LOCKED -->locked-icon<!-- ELSE -->post-icon<!-- ENDIF -->"><!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF --></a>
+			<div class="btn btn-sm btn-default <!-- IF S_IS_WATCHED -->unwatch-icon<!-- ELSE -->watch-icon<!-- ENDIF -->"><a href="{U_WATCH_TOGLE}" title="<!-- IF S_IS_WATCHED -->{L_UNWATCH_ALBUM}<!-- ELSE -->{L_WATCH_ALBUM}<!-- ENDIF -->"><!-- IF S_IS_WATCHED -->{L_UNWATCH_ALBUM}<!-- ELSE -->{L_WATCH_ALBUM}<!-- ENDIF --></a></div>
+		</div>
+	
+			
+		<div class="alert alert-info fade in">
+			<button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+			<strong>{L_ALLOWED_FILETYPES}{L_COLON}</strong> {S_ALLOWED_FILETYPES}
+		</div>
+		
+		<div class="help-block"><span class="label label-warning">{L_MAX_DIMENSIONS}</span> {L_FILE_SIZE}{L_COLON} {S_MAX_FILESIZE}&#44; {L_IMAGE_WIDTH}{L_COLON} {S_MAX_WIDTH}&#44; {L_IMAGE_HEIGHT}{L_COLON} {S_MAX_HEIGHT}.</div>
 				
-					<dt><label for="image_file_{upload_image.S_ROW_COUNT}">{L_FILE}:</label></dt>
-					<dd><input class="inputbox autowidth" type="file" onchange="javascript: add_field({S_UPLOAD_LIMIT});" tabindex="1{upload_image.S_ROW_COUNT}" id="image_file_{upload_image.S_ROW_COUNT}" name="image_file_{upload_image.S_ROW_COUNT}" size="52" /></dd>
-					<!-- IF S_ALLOW_ROTATE -->
-						<dd><input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_0" value="0" checked="checked" /> <label for="rotate_{upload_image.S_ROW_COUNT}_0">{L_ROTATE_NONE}</label> &nbsp;
-							<input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_270" value="270" /> <label for="rotate_{upload_image.S_ROW_COUNT}_270">{L_ROTATE_RIGHT}</label> &nbsp;
-						<input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_180" value="180" /> <label for="rotate_{upload_image.S_ROW_COUNT}_180">{L_ROTATE_UPSIDEDOWN}</label> &nbsp;
-							<input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_90" value="90" /> <label for="rotate_{upload_image.S_ROW_COUNT}_90">{L_ROTATE_LEFT}</label></dd>
-					<!-- ENDIF -->
-				</dl>
+		<!-- IF S_COMMENTS_ENABLED -->
+				<label class="control-label" for="allow_comments">{L_COMMENTS}{L_COLON}</label>
+				<input type="checkbox" class="checkbox" name="allow_comments" id="allow_comments"<!-- IF S_ALLOW_COMMENTS --> checked="checked"<!-- ENDIF --> value="1" /> <label for="allow_comments">{L_ALLOW_COMMENTS}</label>
+       <!-- ENDIF -->		
+				
+			<!-- BEGIN upload_image -->
+				<div id="upload_field_{upload_image.S_ROW_COUNT}">
+					 <label class="control-label" for="image_file_{upload_image.S_ROW_COUNT}">Preview{L_COLON}</label>
+                                 <div class="controls controls-row"> 
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                       <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+									    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image">
+									   </div>
+									   <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                       
+									   <div>
+                                          <span class="btn btn-default btn-file btn-sm"><span class="fileinput-new">Browse</span>
+                                          <span class="fileinput-exists">Change</span>
+                                             <input type="file" tabindex="1{upload_image.S_ROW_COUNT}" id="image_file_{upload_image.S_ROW_COUNT}" name="image_file_{upload_image.S_ROW_COUNT}" size="52" />
+										  </span>
+                                          <a data-dismiss="fileinput" class="btn btn-default fileinput-exists btn-sm" href="#">Remove</a>
+                                       </div>
+									   
+                                    </div>
+                                 </div>
+					
+				<!-- IF S_ALLOW_ROTATE -->
+				<div class="control-group"> 
+				<label class="control-label" for="allow_comments">Rotation{L_COLON}</label>
+				<div class="controls controls-row"> 
+					<div class="radio"><input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_0" value="0" checked="checked"> <label for="rotate_{upload_image.S_ROW_COUNT}_0">{L_ROTATE_NONE}</label></div>
+					<div class="radio"><input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_270" value="270"> <label for="rotate_{upload_image.S_ROW_COUNT}_270">{L_ROTATE_RIGHT}</label></div> 
+					<div class="radio"><input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_180" value="180"> <label for="rotate_{upload_image.S_ROW_COUNT}_180">{L_ROTATE_UPSIDEDOWN}</label></div> 
+					<div class="radio"><input type="radio" name="rotate[{upload_image.S_ROW_COUNT}]" id="rotate_{upload_image.S_ROW_COUNT}_90" value="90"> <label for="rotate_{upload_image.S_ROW_COUNT}_90">{L_ROTATE_LEFT}</label></div>
+				</div> 
+				</div>
+				<!-- ENDIF -->
+				</div>
 			<!-- END upload_image -->
-			<!-- IF S_UPLOAD_LIMIT > 1 -->
-			<a id="add_field_link" href="javascript: add_field({S_UPLOAD_LIMIT});">{L_ADD_UPLOAD_FIELD}</a>
-			<!-- ENDIF -->
-		</fieldset>
-	<span class="corners-bottom"><span></span></span></div>
+<!-- IF S_UPLOAD_LIMIT > 1 -->
+	<a id="add_field_link" style="display: none;" href="javascript: add_field();"><i class="fa fa-plus"></i> {L_ADD_UPLOAD_FIELD}</a>
+<!-- ENDIF -->
+
+</fieldset>
+ <script>
+	for (i = 1; i < limit_fields; i++)
+	{
+	dE('upload_field_' + i);
+	}
+	if (limit_fields > 1)
+	{
+		dE('add_field_link');
+	}
+</script>
+	</div>
 </div>
 
-<div class="panel bg2">
-	<div class="inner"><span class="corners-top"><span></span></span>
-		<fieldset class="submit-buttons">
+
+<div class="clearfix">
+		<fieldset class="form-actions">
 			{S_HIDDEN_FIELDS}{S_CAPTCHA_HIDDEN_FIELDS}
-			<input type="hidden" id="mode" name="mode" value="upload">
-			<input type="reset" accesskey="r" tabindex="200" value="{L_RESET}" class="button2" />&nbsp;
-			<input type="submit" accesskey="s" tabindex="201" name="submit" value="{L_CONTINUE}" class="button1" />&nbsp;
+			<button type="reset" accesskey="r" tabindex="200" value="{L_RESET}" class="btn btn-default">{L_RESET}</button>
+			<button type="submit" accesskey="s" tabindex="201" name="submit" value="{L_CONTINUE}" class="btn btn-default" id="load" name="post" autocomplete="off" data-loading-text="loading...<i class='icon-spin icon-spinner icon-large icon-white'></i>">{L_CONTINUE}</button>
 		</fieldset>
 		{S_FORM_TOKEN}
-	<span class="corners-bottom"><span></span></span></div>
-</div>
 </div>
 </form>
-<div id="outputTarget" class="panel bg2 hidden">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-			<div class="meter">
-				<span style="width: 0%"><p>0%</p></span>
-			</div>
-			<div class="containUploads">
-			</div>
-		<span class="corners-bottom"><span></span></span>
-		</div>
-</div>
-
 <!-- ELSE -->
 
 <!-- INCLUDE gallery/posting_javascript.html -->
 
-<h2><!-- IF U_VIEW_IMAGE --><a href="{U_VIEW_IMAGE}">{IMAGE_NAME}</a><!-- ELSE --><a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a><!-- ENDIF --></h2>
+<div class="side-segment"><h3>
+<!-- IF U_VIEW_IMAGE --><a href="{U_VIEW_IMAGE}">{IMAGE_NAME}</a>
+<!-- ELSE -->
+<a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a>
+<!-- ENDIF -->
+<!-- IF S_UPLOAD_EDIT -->{L_UPLOAD_IMAGE}<!-- ELSEIF S_EDIT -->{L_EDIT_IMAGE}<!-- ELSEIF S_REPORT -->{L_REPORT_IMAGE}<!-- ENDIF -->
+
+</h3></div>
 
 <form id="postform" action="{S_ALBUM_ACTION}" method="post">
 
-<div class="panel" id="postingbox">
-	<div class="inner"><span class="corners-top"><span></span></span>
-		<h3><!-- IF S_UPLOAD_EDIT -->{L_UPLOAD_IMAGE}<!-- ELSEIF S_EDIT -->{L_EDIT_IMAGE}<!-- ELSEIF S_REPORT -->{L_REPORT_IMAGE}<!-- ENDIF --></h3>
-		<fieldset class="fields1 gallery">
-			<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+<div class="well" id="postingbox">
+	<div class="clearfix">
+		<fieldset>
+	   <!-- IF ERROR -->
+        <div class="alert alert-error fade in">
+			<button data-dismiss="alert" class="close"><span class="awe-remove-circle"></span></button>
+			<strong>Attention!</strong>{ERROR}
+		</div>
+		<!-- ENDIF -->
 
 			<!-- IF not S_USER_LOGGED_IN -->
-				<dl>
-					<dt><label for="username">{L_USERNAME}:</label></dt>
-					<dd id="username"><input class="inputbox autowidth" type="text" tabindex="1" name="username" value="{S_USERNAME}" size="60" maxlength="32" /></dd>
-				</dl>
+				<label for="username">{L_USERNAME}{L_COLON}</label>
+				<input class="inputbox autowidth" type="text" tabindex="1" name="username" value="{S_USERNAME}" size="60" maxlength="32" />
 			<!-- ENDIF -->
-			<!-- IF BBCODE_STATUS -->
-			<dl>
-				<dt><label>{L_BBCODES}:</label></dt>
-				<!-- IF S_BBCODE_ALLOWED --><dd><!-- INCLUDE posting_buttons.html --></dd><!-- ENDIF -->
-				<dd>{BBCODE_STATUS}<!-- IF S_BBCODE_ALLOWED -->; {IMG_STATUS} {FLASH_STATUS}; {URL_STATUS}; {SMILIES_STATUS}<!-- ENDIF --></dd>
-			</dl>
+			
+		<!-- IF BBCODE_STATUS -->
+			<label class="control-label">{L_BBCODES}{L_COLON}</label>
+				<!-- IF S_BBCODE_ALLOWED --><!-- INCLUDE posting_buttons.html --><!-- ENDIF -->
+			   
 			<!-- ENDIF -->
 			<!-- IF S_SMILIES_ALLOWED and .smiley -->
-				<dl>
-					<dt><label>{L_SMILIES}:</label></dt>
-					<dd><!-- BEGIN smiley --><a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img class="img-responsive" src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a> <!-- END smiley --></dd>
-					<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED--><dd><a href="{U_MORE_SMILIES}" onclick="gallery_popup(this.href, 300, 350, '_phpbbsmilies'); return false;">{L_MORE_SMILIES}</a></dd><!-- ENDIF -->
-				</dl>
-			<!-- ENDIF -->
+			<div class="space10"></div>
+					<label class="control-label">{L_SMILIES}{L_COLON}</label>
+					<!-- BEGIN smiley --><a href="#" onclick="insert_text('{smiley.A_SMILEY_CODE}', true); return false;"><img src="{smiley.SMILEY_IMG}" width="{smiley.SMILEY_WIDTH}" height="{smiley.SMILEY_HEIGHT}" alt="{smiley.SMILEY_CODE}" title="{smiley.SMILEY_DESC}" /></a> <!-- END smiley -->
+					<!-- IF S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED--><a class="btn-link" href="{U_MORE_SMILIES}" onclick="gallery_popup(this.href, 300, 350, '_phpbbsmilies'); return false;"><i class="fa fa-plus"></i></a><!-- ENDIF -->
+            <div class="space10"></div>		
+		<!-- ENDIF -->
+			
 
-			<!-- BEGIN image -->
-				<hr />
-				<dl>
-					<dt class="simulate-dt<!-- IF image.S_FIRST_ROW and (NUM_IMAGES > 1) --> first<!-- ENDIF -->">{image.U_IMAGE}</dt>
-					<dd class="simulate-dt"><label for="image_name_{image.S_ROW_COUNT}">{L_IMAGE_NAME}:</label></dd>
-					<!-- IF image.S_FIRST_ROW and (NUM_IMAGES > 1) -->
-						<dd class="simulate-dd"><input type="checkbox" name="same_name" id="same_name" value="1" onchange="change_read_write();" /> <label for="same_name">{L_USE_SAME_NAME}</label></dd>
-						<dd class="simulate-dd">{L_USE_NUM} <input class="inputbox autowidth" type="text" id="image_num" name="image_num" size="5" onchange="update_all('image_name'); update_all('message');" onkeyup="update_all('image_name'); update_all('message');" value="1" /></dd>
-					<!-- ENDIF -->
-					<dd class="simulate-dd"><input class="inputbox autowidth" type="text" tabindex="1{image.S_ROW_COUNT}" id="image_name_{image.S_ROW_COUNT}" name="image_name[{image.S_ROW_COUNT}]" value="{image.IMAGE_NAME}"<!-- IF image.S_FIRST_ROW --> onchange="update_all('image_name');" onselect="update_all('image_name');" onclick="update_all('image_name');" onkeyup="update_all('image_name');"<!-- ENDIF --> size="60" maxlength="128" /></dd>
-					<dd class="simulate-dt"><label for="message_{image.S_ROW_COUNT}">{L_IMAGE_DESC}:</label></dd>
-					<dd class="simulate-dd" id="desc_length_{image.S_ROW_COUNT}">{L_DESCRIPTION_LENGTH}</dd>
-					<dd class="simulate-dd"><textarea name="message[{image.S_ROW_COUNT}]" id="message_{image.S_ROW_COUNT}" rows="4" cols="76" tabindex="3" onchange="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF -->" onselect="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" onclick="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" onkeyup="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" class="inputbox">{image.IMAGE_DESC}</textarea></dd>
-					<!-- IF S_ALLOW_ROTATE -->
-					<dd class="simulate-dt"><label for="rotate_{image.S_ROW_COUNT}_0">{L_ROTATE_IMAGE}:</label></dd>
-					<dd class="simulate-dd"><input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_0" value="0" checked="checked" /> <label for="rotate_{image.S_ROW_COUNT}_0">{L_ROTATE_NONE}</label> &nbsp;
-						<input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_270" value="270" /> <label for="rotate_{image.S_ROW_COUNT}_270">{L_ROTATE_RIGHT}</label> &nbsp;
-						<input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_180" value="180" /> <label for="rotate_{image.S_ROW_COUNT}_180">{L_ROTATE_UPSIDEDOWN}</label> &nbsp;
-						<input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_90" value="90" /> <label for="rotate_{image.S_ROW_COUNT}_90">{L_ROTATE_LEFT}</label></dd>
-					<!-- ENDIF -->
-				</dl>
-			<!-- END image -->
+	<!-- BEGIN image -->
+	<div class="clearfix">
+
+			<label class="control-label" for="image_name_{image.S_ROW_COUNT}">{L_IMAGE_NAME}{L_COLON}</label><!-- IF image.S_FIRST_ROW and (NUM_IMAGES > 1) --><input type="checkbox" name="same_name" id="same_name" value="1" onchange="change_read_write();" /> <label for="same_name">{L_USE_SAME_NAME}</label><!-- ENDIF -->
+			  <div class="controls controls-row"> 
+	          <input class="form-control" type="text" tabindex="1{image.S_ROW_COUNT}" id="image_name_{image.S_ROW_COUNT}" name="image_name[{image.S_ROW_COUNT}]" value="{image.IMAGE_NAME}"<!-- IF image.S_FIRST_ROW --> onchange="update_all('image_name');" onselect="update_all('image_name');" onclick="update_all('image_name');" onkeyup="update_all('image_name');"<!-- ENDIF --> size="60" maxlength="128" />
+			</div>
+		
+		<!-- IF image.S_FIRST_ROW and (NUM_IMAGES > 1) -->
+		 <div class="space10"></div>	
+			<div class="controls controls-row"> 
+			<label class="control-label">{L_USE_NUM}</label>
+				<input class="form-control" type="text" id="image_num" name="image_num" onchange="update_all('image_name'); update_all('message');" onkeyup="update_all('image_name'); update_all('message');" value="1">
+	     	</div>
+		<!-- ENDIF -->
+		
+		<!-- IF S_ALLOW_ROTATE -->
+		<div class="control-group"> 
+			<label class="control-label" for="rotate_{image.S_ROW_COUNT}_0">Rotation{L_COLON}</label>
+			  <div class="controls controls-row"> 
+			<div class="radio"><input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_0" value="0" checked="checked" /> <label for="rotate_{image.S_ROW_COUNT}_0">{L_ROTATE_NONE}</label></div>
+			<div class="radio"><input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_270" value="270" /> <label for="rotate_{image.S_ROW_COUNT}_270">{L_ROTATE_RIGHT}</label></div>
+			<div class="radio"><input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_180" value="180" /> <label for="rotate_{image.S_ROW_COUNT}_180">{L_ROTATE_UPSIDEDOWN}</label></div>
+			<div class="radio"><input type="radio" name="rotate[{image.S_ROW_COUNT}]" id="rotate_{image.S_ROW_COUNT}_90" value="90" /> <label for="rotate_{image.S_ROW_COUNT}_90">{L_ROTATE_LEFT}</label></div>
+			</div> 
+		</div>
+		<!-- ENDIF -->
+		
+		<div class="row">
+			<div class="col-md-8">
+			   <label class="control-label" for="message_{image.S_ROW_COUNT}">{L_IMAGE_DESC}{L_COLON}</label>
+			   <textarea class="form-control" name="message[{image.S_ROW_COUNT}]" id="message_{image.S_ROW_COUNT}" rows="7" tabindex="3" onchange="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF -->" onselect="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" onclick="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" onkeyup="set_text_field({image.S_ROW_COUNT});<!-- IF image.S_FIRST_ROW --> update_all('message');<!-- ENDIF --> storeCaret(this);" class="inputbox">{image.IMAGE_DESC}</textarea>
+			    {L_DESCRIPTION_LENGTH}
+			</div>
+            <div class="col-md-4">
+             <label class="control-label" for="">Preview{L_COLON}</label>			 
+			   <div class="img-polaroid text-center">{image.U_IMAGE}</div>
+		    </div>
+		</div>
+			<div class="space10"></div>
+          <hr />
+    </div>
+	<!-- END image -->
 
 			<!-- IF S_REPORT -->
-				<div><textarea name="message" id="message" rows="4" cols="76" tabindex="3" class="inputbox"></textarea></dd></div>
+			<label class="control-label" for="message">{L_REPORT_IMAGE}{L_COLON}</label>
+				<textarea name="message" id="message" rows="4" cols="76" tabindex="3" class="form-control"></textarea>
 			<!-- ENDIF -->
+		
 		</fieldset>
-	<span class="corners-bottom"><span></span></span></div>
+	</div>
 </div>
 
 <!-- IF S_MOVE_PERSONAL or S_COMMENTS_ENABLED or S_CHANGE_AUTHOR -->
-<div class="panel">
-	<div class="inner"><span class="corners-top"><span></span></span>
-		<fieldset class="fields1">
+<div class="well">
+	<div class="clearfix">
+		<fieldset>
 			<!-- IF S_MOVE_PERSONAL -->
-				<dl>
-					<dt><label for="move_to_personal">{L_MOVE_TO_PERSONAL}:</label></dt>
-					<dd><input type="checkbox" class="checkbox" name="move_to_personal" id="move_to_personal" value="1" /> <!-- IF S_MOVE_MODERATOR -->{L_MOVE_TO_PERSONAL_MOD}<!-- ELSE -->{L_MOVE_TO_PERSONAL_EXPLAIN}<!-- ENDIF --></dd>
-				</dl>
+			<div class="control-group"> 
+				<label class="control-label">{L_MOVE_TO_PERSONAL}{L_COLON}</label>
+				<div class="controls controls-row"> 
+					<input type="checkbox" name="move_to_personal" id="move_to_personal" value="1"><label for="move_to_personal"><!-- IF S_MOVE_MODERATOR -->{L_MOVE_TO_PERSONAL_MOD}<!-- ELSE -->{L_MOVE_TO_PERSONAL_EXPLAIN}<!-- ENDIF --></label>
+				</div>
+			</div> 
+				
 			<!-- ENDIF -->
 			<!-- IF S_COMMENTS_ENABLED -->
-				<dl>
-					<dt><label for="allow_comments">{L_COMMENTS}:</label></dt>
-					<dd><input type="checkbox" class="checkbox" name="allow_comments" id="allow_comments"<!-- IF S_ALLOW_COMMENTS --> checked="checked"<!-- ENDIF --> value="1" /> <label for="allow_comments">{L_ALLOW_COMMENTS}</label></dd>
-				</dl>
+			<div class="control-group"> 
+				<label class="control-label" for="allow_comments">{L_COMMENTS}{L_COLON}</label>
+				<div class="controls controls-row"> 
+					<input type="checkbox" name="allow_comments" id="allow_comments"<!-- IF S_ALLOW_COMMENTS --> checked="checked"<!-- ENDIF --> value="1"><label for="allow_comments">{L_ALLOW_COMMENTS}</label>
+				</div>
+			</div> 
 			<!-- ENDIF -->
 			<!-- IF S_CHANGE_AUTHOR and U_FIND_USERNAME -->
-				<dl>
-					<dt><label for="change_author">{L_CHANGE_AUTHOR}:</label></dt>
-					<dd><input type="text" class="inputbox autowidth" name="change_author" id="change_author" value="" size="32" /> [ <a href="{U_FIND_USERNAME}" onclick="find_username(this.href); return false;">{L_FIND_USERNAME}</a> ]</dd>
-				</dl>
+			<div class="control-group"> 
+				<label class="control-label" for="change_author">{L_CHANGE_AUTHOR}{L_COLON}</label>
+				<div class="controls controls-row"> 
+				 <div class="input-group">
+			       <input type="text" tabindex="1" class="form-control" name="change_author" id="change_author" value="" size="32" placeholder="">
+			    <span class="input-group-btn">   
+				   <a title="" data-placement="right" rel="tooltip" onclick="find_username(this.href); return false;" class="btn btn-default" href="{U_FIND_USERNAME}" data-original-title="{L_FIND_USERNAME}"><i class="fa fa-user"></i></a>
+			     </span>
+				 </div>
+				</div>
+			</div>
 			<!-- ENDIF -->
 		</fieldset>
-	<span class="corners-bottom"><span></span></span></div>
+	</div>
 </div>
 <!-- ENDIF -->
 
-<script type="text/javascript">
-//<![CDATA[
+<script>
 	set_text_field(0);
-//]]>
 </script>
 
-<div class="panel bg2">
-	<div class="inner"><span class="corners-top"><span></span></span>
-		<fieldset class="submit-buttons">
+	<fieldset class="form-actions">
 			{S_HIDDEN_FIELDS}
 			<input type="hidden" id="mode" name="mode" value="upload_edit">
-			<input type="reset" accesskey="r" tabindex="200" value="{L_RESET}" class="button2" />&nbsp;
-			<input type="submit" accesskey="s" tabindex="201" name="submit" value="{L_SUBMIT}" class="button1" />&nbsp;
-		</fieldset>
-		{S_FORM_TOKEN}
-	<span class="corners-bottom"><span></span></span></div>
-</div>
+			<button type="reset" accesskey="r" tabindex="200" value="{L_RESET}" class="btn btn-default">{L_RESET}</button>
+			<button type="submit" accesskey="s" tabindex="201" name="submit" value="{L_SUBMIT}" class="btn btn-default" id="load" name="post" autocomplete="off" data-loading-text="loading...<i class='icon-spin icon-spinner icon-large icon-white'></i>">{L_SUBMIT}</button>
+	</fieldset>
+	{S_FORM_TOKEN}
 </form>
 <!-- ENDIF -->
 

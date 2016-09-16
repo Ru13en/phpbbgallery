@@ -1,68 +1,45 @@
 <!-- BEGIN imageblock -->
-<div class="forumbg">
-	<div class="inner">
-		<span class="corners-top"><span></span></span>
-		<ul class="topiclist">
-			<li class="header">
-				<dl class="icon">
-					<dt><!-- IF imageblock.U_BLOCK --><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a><!-- ELSE -->{imageblock.BLOCK_NAME}<!-- ENDIF --></dt>
-				</dl>
-			</li>
-		</ul>
-		<ul class="topiclist topics">
-			<li class="bg2">
-				<table style="width: 100%;" border="0" class="forumline">
-					<!-- BEGIN imagerow -->
-					<tr>
-						<!-- BEGIN image -->
-						<td style="vertical-align: top; width: {imageblock.S_COL_WIDTH}; padding: 10px;">
-							<table style="width: 100%;" class="bg2 forumline">
-								<tr>
-									<td style="vertical-align: middle; text-align: center; height: {S_THUMBNAIL_SIZE}px;" class="bg1<!-- IF imageblock.imagerow.image.S_UNAPPROVED --> g_unapproved<!-- ENDIF --><!-- IF imageblock.imagerow.image.S_LOCKED --> g_locked<!-- ENDIF --><!-- IF imageblock.imagerow.image.S_REPORTED --> g_reported<!-- ENDIF -->">
-										<span class="genmed">{imageblock.imagerow.image.UC_THUMBNAIL}</span>
-									</td>
-								</tr>
-								<tr>
-									<td class="bg2" style="vertical-align: top;">
-										<div class="gensmall" style="overflow: hidden;">
-											<!-- IF imageblock.imagerow.image.CONTEST_RANK -->{L_CONTEST_RESULT}{L_COLON} <strong>{imageblock.imagerow.image.CONTEST_RANK}</strong><br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.UC_IMAGE_NAME -->{L_IMAGE_NAME}{L_COLON} {imageblock.imagerow.image.UC_IMAGE_NAME}<br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.U_ALBUM -->{L_ALBUM_NAME}{L_COLON} <a href="{imageblock.imagerow.image.U_ALBUM}" style="font-weight: bold;" title="{imageblock.imagerow.image.ALBUM_NAME_FULL}">{imageblock.imagerow.image.ALBUM_NAME}</a><br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.POSTER -->{L_UPLOADED_BY_USER}{L_COLON} {imageblock.imagerow.image.POSTER}<br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.TIME -->{L_UPLOADED_ON_DATE}{L_COLON} {imageblock.imagerow.image.TIME}<br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.VIEW > -1 -->{L_GALLERY_VIEWS}{L_COLON} {imageblock.imagerow.image.VIEW}<br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.S_RATINGS -->{L_RATING}{L_COLON} <a href="{imageblock.imagerow.image.U_RATINGS}">{imageblock.imagerow.image.S_RATINGS}</a><br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.S_COMMENTS -->{imageblock.imagerow.image.L_COMMENTS}{L_COLON} <a href="{imageblock.imagerow.image.U_COMMENTS}">{imageblock.imagerow.image.S_COMMENTS}</a><br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.S_IP -->{L_IP}{L_COLON} {imageblock.imagerow.image.S_IP} &#187; <a href="{imageblock.imagerow.image.U_WHOIS}" onclick="popup(this.href, 750, 500); return false;">{L_WHOIS}</a><br /><!-- ENDIF -->
-											<!-- IF imageblock.imagerow.image.U_REPORT or imageblock.imagerow.image.U_STATUS or imageblock.imagerow.image.U_MOVE or  imageblock.imagerow.image.U_EDIT or imageblock.imagerow.image.U_DELETE -->
-											<a href="javascript: $('#moderate_imageblock_{imageblock.S_ROW_COUNT}_imagerow_{imageblock.imagerow.image.IMAGE_ID}.show()');">{L_MODERATE}</a>
-											<div id="moderate_imageblock_{imageblock.S_ROW_COUNT}_imagerow_{imageblock.imagerow.image.IMAGE_ID}" style="display: none;">
-												<!-- IF imageblock.imagerow.image.U_REPORT -->&#187; <a href="{imageblock.imagerow.image.U_REPORT}" class="reported-images-number">{L_READ_REPORT}</a><br /><!-- ENDIF -->
-												<!-- IF imageblock.imagerow.image.U_STATUS -->&#187; <a href="{imageblock.imagerow.image.U_STATUS}">{imageblock.imagerow.image.L_STATUS}</a><br /><!-- ENDIF -->
-												<!-- IF imageblock.imagerow.image.U_MOVE -->&#187; <a href="{imageblock.imagerow.image.U_MOVE}">{L_MOVE}</a><br /><!-- ENDIF -->
-												<!-- IF imageblock.imagerow.image.U_EDIT -->&#187; <a href="{imageblock.imagerow.image.U_EDIT}">{L_EDIT_IMAGE}</a><br /><!-- ENDIF -->
-												<!-- IF imageblock.imagerow.image.U_DELETE -->&#187; <a href="{imageblock.imagerow.image.U_DELETE}">{L_DELETE_IMAGE}</a><br /><!-- ENDIF -->
-											</div>
-											<!-- ENDIF -->
-										</div>
-									</td>
-								</tr>
-							</table>
-						</td>
-						<!-- END image -->
-						<!-- BEGIN no_image --> 
-							<td class="bg2"  style="vertical-align: top; width: {imageblock.S_COL_WIDTH};">
-								<table width="100%" cellpadding="2" cellspacing="10" border="0" class="forumline"><tr>
-								<td style="height: {S_THUMBNAIL_SIZE}px;" class="bg1"></td>
-								</tr></table>
-							</td> 
-						<!-- END no_image -->
-					</tr>
-					<!-- END imagerow -->
-				</table>
-			</li>
-		</ul>
-		<span class="corners-bottom"><span></span></span>
+<div class="well">
+	<div class="side-segment">
+		<h3><!-- IF imageblock.U_BLOCK --><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a><!-- ELSE -->{imageblock.BLOCK_NAME}<!-- ENDIF --></h3>
+	</div>
+	<div class="clearfix">
+		<div class="row">
+			<!-- BEGIN image -->
+			<div class="col-md-3">
+				<div class="well well-sm">
+				<!-- IF imageblock.image.U_IMAGE --><a href="{imageblock.image.U_IMAGE}"><!-- ENDIF -->{imageblock.image.UC_IMAGE_NAME}<!-- IF imageblock.image.U_IMAGE --></a><!-- ENDIF -->
+					<span class="fake-thumb2"><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --><a href="{imageblock.image.UC_THUMBNAIL_ACTION}"><!-- ENDIF --><img src="{imageblock.image.UC_THUMBNAIL}" alt="{imageblock.image.UC_IMAGE_NAME}" title="{imageblock.image.UC_IMAGE_NAME}" /><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --></a><!-- ENDIF -->
+					<div class="clearfix details-gallery text-overflow">
+						<ul class="list-unstyled">
+							<!-- IF imageblock.image.CONTEST_RANK --><li>{L_CONTEST_RESULT}{L_COLON} <strong>{imageblock.image.CONTEST_RANK}</strong></li><!-- ENDIF -->
+							<!-- IF imageblock.image.UC_IMAGE_NAME --><li>{L_IMAGE_NAME}{L_COLON} {imageblock.image.UC_IMAGE_NAME}</li><!-- ENDIF -->
+							<!-- IF imageblock.image.U_ALBUM --><li>{L_ALBUM_NAME}{L_COLON} <a href="{imageblock.image.U_ALBUM}" style="font-weight: bold;" title="{imageblock.image.ALBUM_NAME_FULL}">{imageblock.image.ALBUM_NAME}</a></li><!-- ENDIF -->
+							<!-- IF imageblock.image.POSTER --><li>{L_UPLOADED_BY_USER}{L_COLON} {imageblock.image.POSTER}</li><!-- ENDIF -->
+							<!-- IF imageblock.image.TIME --><li>{L_UPLOADED_ON_DATE}{L_COLON} {imageblock.image.TIME}</li><!-- ENDIF -->
+							<!-- IF imageblock.image.VIEW > -1 --><li>{L_GALLERY_VIEWS}{L_COLON} {imageblock.image.VIEW}</li><!-- ENDIF -->
+							<!-- IF imageblock.image.S_RATINGS --><li>{L_RATING}{L_COLON} <a href="{imageblock.image.U_RATINGS}">{imageblock.image.S_RATINGS}</a></li><!-- ENDIF -->
+							<!-- IF imageblock.image.S_COMMENTS --><li>{imageblock.image.L_COMMENTS}{L_COLON} <a href="{imageblock.image.U_COMMENTS}">{imageblock.image.S_COMMENTS}</a></li><!-- ENDIF -->
+							<!-- IF imageblock.image.S_IP --><li>{L_IP}{L_COLON} {imageblock.image.S_IP} &#187; <a href="{imageblock.image.U_WHOIS}" onclick="popup(this.href, 750, 500); return false;">{L_WHOIS}</a></li><!-- ENDIF -->
+						 </ul>
+						 
+						<!-- IF imageblock.image.U_REPORT or imageblock.image.U_STATUS or imageblock.image.U_MOVE or  imageblock.image.U_EDIT or imageblock.image.U_DELETE -->
+						<a href="javascript: dE('moderate_imageblock_{imageblock.S_ROW_COUNT}_imagerow_{imageblock.image.IMAGE_ID}');">{L_MODERATE}</a>
+						<div id="moderate_imageblock_{imageblock.S_ROW_COUNT}_imagerow_{imageblock.image.IMAGE_ID}" style="display: none;">
+							<ul class="list-unstyled">
+								<!-- IF imageblock.image.U_REPORT --><li><a href="{imageblock.image.U_REPORT}" class="reported-images-number">{L_READ_REPORT}</a></li><!-- ENDIF -->
+								<!-- IF imageblock.image.U_STATUS --><li><a href="{imageblock.image.U_STATUS}">{imageblock.image.L_STATUS}</a></li><!-- ENDIF -->
+								<!-- IF imageblock.image.U_MOVE --><li><a href="{imageblock.image.U_MOVE}">{L_MOVE}</a></li><!-- ENDIF -->
+								<!-- IF imageblock.image.U_EDIT --><li><a href="{imageblock.image.U_EDIT}">{L_EDIT_IMAGE}</a></li><!-- ENDIF -->
+								<!-- IF imageblock.image.U_DELETE --><li><a href="{imageblock.image.U_DELETE}">{L_DELETE_IMAGE}</a></li><!-- ENDIF -->
+							</ul>
+						</div>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+			<!-- END image -->
+		</div>
 	</div>
 </div>
 <!-- END imageblock -->
