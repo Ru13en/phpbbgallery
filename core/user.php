@@ -384,6 +384,7 @@ class user
 				break;
 
 				case 'watch_own':
+				case 'watch_favo':
 				case 'watch_com':
 				case 'subscribe_pegas':
 					$validated_data[$name] = (bool) $value;
@@ -470,6 +471,8 @@ class user
 		'user_allow_comments'	=> true,
 		// Shall the user be subscribed to his own images?
 		'watch_own'			=> true,
+		// Shall the user be subscribed to his favorite images?
+		'watch_favo'		=> false,
 		// Shall the user be subscribed if he comments on an images?
 		'watch_com'			=> false,
 		// Automatically subscribe user to new personal galleries?

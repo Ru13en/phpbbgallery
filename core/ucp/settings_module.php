@@ -80,6 +80,7 @@ class settings_module
 		{
 			$gallery_settings = array(
 				'watch_own'				=> $this->request->variable('watch_own', false),
+				'watch_favo'			=> $this->request->variable('watch_favo', false),
 				'watch_com'				=> $this->request->variable('watch_com', false),
 				'user_allow_comments'	=> $this->request->variable('allow_comments', false),
 			);
@@ -124,6 +125,7 @@ class settings_module
 			'L_TITLE_EXPLAIN'	=> $this->user->lang['WATCH_NOTE'],
 
 			'S_WATCH_OWN'		=> $this->gallery_user->get_data('watch_own'),
+			'S_WATCH_FAVO'		=> $this->gallery_user->get_data('watch_favo'),
 			'S_WATCH_COM'		=> $this->gallery_user->get_data('watch_com'),
 			'S_ALLOW_COMMENTS'	=> $this->gallery_user->get_data('user_allow_comments'),
 			'S_COMMENTS_ENABLED'=> $this->config['phpbb_gallery_allow_comments'] && $this->config['phpbb_gallery_comment_user_control'],
