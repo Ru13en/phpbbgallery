@@ -115,31 +115,24 @@
 <!-- ENDIF -->
 
 <!-- IF S_USERS_PERSONAL_GALLERIES -->
-<div class="forabg">
-	<div class="inner">
-		<ul class="topiclist">
-			<li class="header">
-				<dl class="icon">
-					<dt>
-						<div class="list-inner">{L_GALLERY}</div>
-					</dt>
-					<dd class="topics">{L_GALLERY_IMAGES}</dd>
-					<dd class="lastpost">
-						<span>{L_LAST_IMAGE}</span>
-					</dd>
-				</dl>
-			</li>
-		</ul>
-		<ul class="topiclist forums">
-			<li class="row">
-				<dl class="icon forum_unread">
-					<dt>
+<div class="panel panel-default">
+	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
+		<thead>
+			<tr>
+				<th data-class="expand"><i class="fa fa-bullhorn"></i> {L_GALLERY}</th>
+				<th class="large80" data-hide="phone"><i class="fa fa-bar-chart-o"></i> {L_GALLERY_IMAGES}</th>
+				<th class="large20" data-hide="phone"><i class="fa fa-comments-o"></i> {L_LAST_IMAGE}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
 						<a href="{U_USERS_PERSONAL_GALLERIES}" class="icon-link"></a>
 						<div class="list-inner">
 							<a class="forumtitle" href="{U_USERS_PERSONAL_GALLERIES}">{L_USERS_PERSONAL_ALBUMS}</a>
 							<!-- IF S_PERSONAL_ALBUM -->
-							<br /> {L_YOUR_PERSONAL_ALBUM}{L_COLON} <a
-								href="{U_PERSONAL_ALBUM}"
+							<br /> {L_YOUR_PERSONAL_ALBUM}{L_COLON} 
+							<a href="{U_PERSONAL_ALBUM}"
 								<!-- IF !U_PERSONAL_ALBUM_COLOR -->class="username"<!-- ELSE -->class="username-coloured"
 								style="color: #{U_PERSONAL_ALBUM_COLOR};"<!-- ENDIF -->>{U_PERSONAL_ALBUM_USER}
 							</a>
@@ -148,28 +141,28 @@
 								{L_GALLERY_IMAGE}{L_COLON} <strong>{U_PERSONAL_GALLERIES_IMAGES}</strong>
 							</div>
 						</div>
-					</dt>
-					<dd class="topics">
-						{U_PERSONAL_GALLERIES_IMAGES}
-						<dfn>{L_GALLERY_IMAGES}</dfn>
-					</dd>
-					<dd class="lastpost">
-						<div>
-							<span style="float: left; margin-right: 15px;"> <dfn>{L_LAST_IMAGES}</dfn>
-								<a href="{U_IMAGE_ACTION}"><img class="img-responsive"
-									src="{U_PERSONAL_GALLERIES_LAST_IMAGE}"
-									style="max-width: 50px; max-height: 50px;"></a>
-							</span> <span style="width: 150px;"> <!-- IF U_IMAGENAME -->
-								<a href="{U_IMAGENAME_ACTION}"><p
-										style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; margin-bottom: 2px;">{U_IMAGENAME}</p></a>
-								{U_TIME} <br> {U_UPLOADER}<!-- ENDIF -->
-							</span>
-						</div>
-					</dd>
-					<dl>
-			</li>
-		</ul>
-	</div>
+				</td>
+				<td class="stats-col">
+					<span class="stats-wrapper">
+						{U_PERSONAL_GALLERIES_IMAGES}&nbsp;{L_GALLERY_IMAGES}
+					</span>
+				</td>
+				<td>
+					<span class="last-wrapper text-overflow">
+						<span style="float: left; margin-right: 15px;">{L_LAST_IMAGES}
+								<a href="{U_IMAGE_ACTION}"><img class="img-responsive" src="{U_PERSONAL_GALLERIES_LAST_IMAGE}" style="max-width: 50px; max-height: 50px;"></a>
+						</span> 
+						<!-- IF U_IMAGENAME -->
+						<a href="{U_IMAGENAME_ACTION}">
+							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; margin-bottom: 2px;">{U_IMAGENAME}</p>
+						</a>
+						{U_TIME} <br> {U_UPLOADER}
+						<!-- ENDIF -->
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <!-- ENDIF -->
 
