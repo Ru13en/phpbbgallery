@@ -22,21 +22,34 @@
 	</div>
 </div>
 <!-- ENDIF -->
-<div class="pull-left">
-<div class="btn-group">
-    <div class="dropdown">
-       <a title="" data-original-title="" class="btn btn-small btn-default" data-toggle="dropdown" href="#"><i class="fa fa-folder"></i> Manage <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-	           <!-- IF U_EDIT_ALBUM --><li><a href="{U_EDIT_ALBUM}">{L_EDIT_ALBUM}</a></li><!-- ENDIF -->
-	           <!-- IF U_CREATE_ALBUM --><li><a href="{U_CREATE_ALBUM}">{L_CREATE_SUBALBUM}</a></li><!-- ENDIF -->
-		    <!-- IF not S_IN_GALLERY_POPUP and U_UPLOAD_IMAGE -->
-		       <li><a href="{U_UPLOAD_IMAGE}" title=""><i class="<!-- IF S_IS_LOCKED -->fa fa-lock<!-- ELSE -->fa fa-upload<!-- ENDIF -->"></i> <!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF --></a></li>
-            <!-- ENDIF -->
-			<!-- IF not S_IN_GALLERY_POPUP and U_MCP --><li><a href="{U_MCP}"><i class="fa fa-legal"></i>{L_MCP}</a></li><!-- ENDIF -->
-		  </ul>
-    </div>
+<div class="clearfix">
+	<div class="pull-left">
+		<div class="btn-group">
+		    <div class="dropdown">
+		       <a title="" data-original-title="" class="btn btn-small btn-default" data-toggle="dropdown" href="#"><i class="fa fa-folder"></i> Manage <span class="caret"></span></a>
+		            <ul class="dropdown-menu">
+			           <!-- IF U_EDIT_ALBUM --><li><a href="{U_EDIT_ALBUM}">{L_EDIT_ALBUM}</a></li><!-- ENDIF -->
+			           <!-- IF U_CREATE_ALBUM --><li><a href="{U_CREATE_ALBUM}">{L_CREATE_SUBALBUM}</a></li><!-- ENDIF -->
+				    <!-- IF not S_IN_GALLERY_POPUP and U_UPLOAD_IMAGE -->
+				       <li><a href="{U_UPLOAD_IMAGE}" title=""><i class="<!-- IF S_IS_LOCKED -->fa fa-lock<!-- ELSE -->fa fa-upload<!-- ENDIF -->"></i> <!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF --></a></li>
+		            <!-- ENDIF -->
+					<!-- IF not S_IN_GALLERY_POPUP and U_MCP --><li><a href="{U_MCP}"><i class="fa fa-legal"></i>{L_MCP}</a></li><!-- ENDIF -->
+				  </ul>
+		    </div>
+		</div>
+	</div>
+	<!-- IF .imageblock -->
+	<!-- IF .pagination or TOTAL_IMAGES -->
+	<div class="pull-right">
+	     <ul class="pagination pagination-sm hidden-xs">
+		   <li class="active"><a>{TOTAL_IMAGES}</a></li>
+		   <!-- IF .pagination --><!-- INCLUDE pagination.html --><!-- ENDIF -->
+	     </ul>
+	</div>
+	<!-- ENDIF -->
+	<!-- ENDIF -->
 </div>
-</div>
+
 <!-- ENDIF -->
 
 <!-- IF .albumrow -->
@@ -148,19 +161,6 @@
 			</fieldset>
 	</form>
 	
-	<!-- IF .imagerow -->
-		<!-- IF U_UPLOAD_IMAGE -->
-			<div class="buttons">
-				<div class="<!-- IF S_IS_LOCKED -->fa fa-icon<!-- ELSE -->fa fa-icon<!-- ENDIF -->"><a href="{U_UPLOAD_IMAGE}" title="<!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF -->"><span></span><!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF --></a></div>
-			</div>
-		<!-- ENDIF -->
-     <ul class="pagination pagination-sm hidden-xs">
-	   <!-- IF PREVIOUS_PAGE --><li><a href="{PREVIOUS_PAGE}">{L_PREVIOUS}</a></li><!-- ENDIF -->
-	   <li class="active"><a>{TOTAL_IMAGES}</a></li>
-	   <!-- IF PAGINATION --><li><a href="#" onclick="jumpto(); return false;" title="{L_JUMP_TO_PAGE}">{PAGE_NUMBER}</a></li> <li><a>{PAGINATION}</a></li><!-- ENDIF -->
-       <!-- IF NEXT_PAGE --><li><a href="{NEXT_PAGE}">{L_NEXT}</a></li><!-- ENDIF -->
-     </ul>
-	<!-- ENDIF -->
 <!-- ENDIF -->
 
 <!-- IF ALBUM_JUMPBOX -->
