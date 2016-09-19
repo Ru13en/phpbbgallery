@@ -1,20 +1,27 @@
 <!-- INCLUDE gallery/gallery_header.html -->
 
-<div class="side-segment"><h3><a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a></h3></div>
-<div class="clearfix">
-<!-- IF ALBUM_DESC --><p class="pull-left">{ALBUM_DESC}</p><!-- ENDIF -->
-
-<div class="pull-right">
-<!-- IF ALBUM_CONTEST_START -->{ALBUM_CONTEST_START}<!-- ENDIF -->
-<!-- IF ALBUM_CONTEST_RATING -->{ALBUM_CONTEST_RATING}<!-- ENDIF -->
-<!-- IF ALBUM_CONTEST_END -->{ALBUM_CONTEST_END}<!-- ENDIF -->
-<!-- IF MODERATORS --><strong>{L_MODERATORS}{L_COLON}</strong> {MODERATORS}<!-- ENDIF -->
-</div>
+<div class="side-segment">
+	<h3><a href="{U_VIEW_ALBUM}">{ALBUM_NAME}</a><!-- IF ALBUM_DESC --></h3>
+	<h4><i class="fa fa-caret-right"></i> {ALBUM_DESC} </h4><!-- ENDIF -->
 </div>
 
 <div class="clearfix">
-<div class="pull-left">
 <!-- IF not S_IN_GALLERY_POPUP and ALBUM_DESC or MODERATORS or U_MCP -->
+<div class="pull-right">
+	<div class="btn-group">
+	    <div class="dropdown">
+	    <a title="" data-original-title="" class="btn btn-small btn-default" data-toggle="dropdown" href="#"> {L_MODERATORS} </a>
+			 <ul class="dropdown-menu">
+				<!-- IF ALBUM_CONTEST_START --><li>{ALBUM_CONTEST_START}</li><!-- ENDIF -->
+				<!-- IF ALBUM_CONTEST_RATING --><li>{ALBUM_CONTEST_RATING}</li><!-- ENDIF -->
+				<!-- IF ALBUM_CONTEST_END --><li>{ALBUM_CONTEST_END}</li><!-- ENDIF -->
+				<!-- IF MODERATORS --><li>{MODERATORS}</li><!-- ENDIF -->
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="pull-left">
 <div class="btn-group">
     <div class="dropdown">
        <a title="" data-original-title="" class="btn btn-small btn-default" data-toggle="dropdown" href="#"><i class="fa fa-folder"></i> Manage <span class="caret"></span></a>
@@ -24,7 +31,7 @@
 		    <!-- IF not S_IN_GALLERY_POPUP and U_UPLOAD_IMAGE -->
 		       <li><a href="{U_UPLOAD_IMAGE}" title=""><i class="<!-- IF S_IS_LOCKED -->fa fa-lock<!-- ELSE -->fa fa-upload<!-- ENDIF -->"></i> <!-- IF S_IS_LOCKED -->{L_ALBUM_LOCKED}<!-- ELSE -->{L_UPLOAD_IMAGE}<!-- ENDIF --></a></li>
             <!-- ENDIF -->
-			<!-- IF not S_IN_GALLERY_POPUP and U_MCP --><li><a href="{U_MCP}">{L_MCP}</a></li><!-- ENDIF -->
+			<!-- IF not S_IN_GALLERY_POPUP and U_MCP --><li><a href="{U_MCP}"><i class="fa fa-legal"></i>{L_MCP}</a></li><!-- ENDIF -->
 		  </ul>
     </div>
 </div>

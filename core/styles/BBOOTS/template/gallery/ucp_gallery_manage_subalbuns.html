@@ -66,10 +66,11 @@
 <!-- ENDIF -->
 
 <!-- IF S_MANAGE_SUBALBUMS -->
-<div class="side-segment"><h3>{L_TITLE}</h3></div> 
 <div class="tab-pane active">
+<fieldset class="framed-ucp">
+<legend>{L_TITLE}</legend>
 
-	<p><strong>{NAVIGATION} <i class="icon-long-arrow-right"></i></strong> <!-- IF S_ALBUM --> <a class="btn btn-xs" href="{U_EDIT}" title="{L_EDIT}"><i class="icon-pencil"></i></a> <a class="btn btn-default btn-xs" href="{U_DELETE}" title="{L_DELETE}"><i class="fa fa-times"></i></a>  <a class="btn btn-default btn-xs" href="{U_GOTO}" title="{L_GOTO}"><i class="fa fa-circle-arrow-right"></i></a> <a class="btn btn-default btn-xs" href="{U_UPLOAD}" title="{L_UPLOAD_IMAGE}"><i class="fa fa-upload"></i></a> <!-- ENDIF --></p>
+	<p><strong>{NAVIGATION} <i class="icon-long-arrow-right"></i></strong> <!-- IF S_ALBUM --> <a class="btn btn-xs" href="{U_EDIT}" title="{L_EDIT}"><i class="icon-pencil"></i></a> <a class="btn btn-default btn-xs" href="{U_DELETE}" title="{L_DELETE}"><i class="fa fa-times" aria-hidden="true"></i></a>  <a class="btn btn-default btn-xs" href="{U_GOTO}" title="{L_GOTO}"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a> <a class="btn btn-default btn-xs" href="{U_UPLOAD}" title="{L_UPLOAD_IMAGE}"><i class="fa fa-upload" aria-hidden="true"></i></a> <!-- ENDIF --></p>
 
 	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
 		<thead>
@@ -83,7 +84,7 @@
 			<!-- BEGIN album_row -->
 			<tr>
 				<td title="{album_row.ALBUM_NAME}">
-					<i class="row-icon" style="background-image: url({album_row.FOLDER_IMAGE}); background-repeat: no-repeat;"></i>
+				     <i class="row-icon-font icon-moon-default <!-- IF albumrow.S_IS_LINK --> icon-moon-link2<!-- ENDIF --> <!-- IF albumrow.S_UNREAD_ALBUM --> text-info<!-- ELSE --> text-muted<!-- ENDIF -->" title="{albumrow.ALBUM_FOLDER_IMG_ALT}"></i>
 					<!-- IF album_row.FORUM_IMAGE --><span class="forum-image">{album_row.FORUM_IMAGE}</span><!-- ENDIF -->
 					<a href="{album_row.U_ALBUM}" class="topictitle">{album_row.ALBUM_NAME}</a><br />
 					<!-- IF album_row.ALBUM_DESCRIPTION --><small>{album_row.ALBUM_DESCRIPTION}</small><!-- ENDIF -->
@@ -121,6 +122,6 @@
 			</fieldset>
 		</form>
 	<!-- ENDIF -->
-	
+	</fieldset>
 </div>
 <!-- ENDIF -->

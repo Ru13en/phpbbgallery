@@ -1,32 +1,22 @@
 <!-- BEGIN albumrow -->
 	<!-- IF (albumrow.S_IS_CAT and not albumrow.S_FIRST_ROW) or albumrow.S_NO_CAT -->
-     </table>
-	 </div>
+		<span class="clear"></span>
 	<!-- ENDIF -->
 
 	<!-- IF albumrow.S_IS_CAT or albumrow.S_FIRST_ROW or albumrow.S_NO_CAT  -->
-	<div class="panel panel-default">
-	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
-		<thead>
-			<tr>
-				<th data-class="expand"><!-- IF albumrow.S_IS_CAT --><i class="fa fa-list-ol"></i> <a href="{albumrow.U_VIEWALBUM}">{albumrow.ALBUM_NAME}</a><!-- ELSE --><i class="fa fa-list"></i> {L_ALBUM}<!-- ENDIF --></th>
-				<th class="large80" data-hide="phone"><i class="fa fa-bar-chart-o"></i> {L_IMAGES}</th>
-				<th data-hide="phone"><i class="fa fa-picture-o"></i> Thumbnail</th>
-			    <th class="large-gallery" data-hide="phone"><i class="fa fa-comments"></i> {L_LAST_IMAGE}</th>
-			</tr>
-		</thead>
-		<tbody>
+		<span class="clear"></span>
+		<h2<!-- IF albumrow.S_FIRST_ROW --> class="invade-linklist"<!-- ENDIF -->><!-- IF albumrow.S_IS_CAT --><a href="{albumrow.U_VIEWALBUM}">{albumrow.ALBUM_NAME}</a><!-- ELSE -->{L_ALBUM}<!-- ENDIF --></h2>
 	<!-- ENDIF -->
 
 	<!-- IF not albumrow.S_IS_CAT -->
         
-		<div class="col-lg-3 col-md-4 col-xs-6">
+		<div class="polaroid col-lg-3 col-md-4 col-xs-6">
 			<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 				<a href="{albumrow.U_VIEWALBUM}" style="font-weight: bold; font-size: 1.2em;<!-- IF S_PERSONAL_GALLERY and albumrow.ALBUM_COLOUR --> color: {albumrow.ALBUM_COLOUR};<!-- ENDIF -->">{albumrow.ALBUM_NAME}</a>
 			</p>
 			<hr />
 			<!-- IF albumrow.UC_THUMBNAIL -->
-			<img class="img-responsive" src="{albumrow.UC_THUMBNAIL}" alt="{albumrow.UC_IMAGE_NAME}" title="{albumrow.UC_IMAGE_NAME}" />
+			<img src="{albumrow.UC_THUMBNAIL}" alt="{albumrow.UC_IMAGE_NAME}" title="{albumrow.UC_IMAGE_NAME}" />
 			<!-- ENDIF -->
 
 			<hr />
@@ -53,15 +43,16 @@
 			<!-- ENDIF -->
 
 			<!-- IF .albumrow.subalbum and albumrow.S_LIST_SUBALBUMS -->
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" id="subalbumdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					{albumrow.L_SUBALBUM_STR}
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="subalbumdropdown">
-						<!-- BEGIN subalbum -->
-							<a href="{albumrow.subalbum.U_SUBALBUM}" class="subforum<!-- IF albumrow.subalbum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="<!-- IF albumrow.subalbum.UNREAD -->{L_UNREAD_IMAGES}<!-- ELSE -->{L_NO_UNREAD_IMAGES}<!-- ENDIF -->">{albumrow.subalbum.SUBALBUM_NAME}</a><!-- IF not albumrow.subalbum.S_LAST_ROW --><br /><!-- ENDIF -->
-						<!-- END subalbum -->
-					</ul>
+				<div class="dropdown-container">
+					<a href="#" class="responsive-menu-link dropdown-trigger">{albumrow.L_SUBALBUM_STR}</a>
+					<div class="dropdown" style="display: none;">
+						<div class="pointer"><div class="pointer-inner"></div></div>
+						<div class="dropdown-contents">
+							<!-- BEGIN subalbum -->
+								<a href="{albumrow.subalbum.U_SUBALBUM}" class="subforum<!-- IF albumrow.subalbum.S_UNREAD --> unread<!-- ELSE --> read<!-- ENDIF -->" title="<!-- IF albumrow.subalbum.UNREAD -->{L_UNREAD_IMAGES}<!-- ELSE -->{L_NO_UNREAD_IMAGES}<!-- ENDIF -->">{albumrow.subalbum.SUBALBUM_NAME}</a><!-- IF not albumrow.subalbum.S_LAST_ROW --><br /><!-- ENDIF -->
+							<!-- END subalbum -->
+						</div>
+					</div>
 				</div>
 			<!-- ELSE -->
 			<br/>
@@ -70,9 +61,7 @@
 	<!-- ENDIF -->
 
 	<!-- IF albumrow.S_LAST_ROW -->
-		</tbody>
-	</table>
-	</div>
+		<span class="clear"></span>
 	<!-- ENDIF -->
 
 <!-- BEGINELSE -->
@@ -80,3 +69,7 @@
 		<strong>{L_NO_ALBUMS}</strong>
 	</div>
 <!-- END albumrow -->
+
+<!-- IF .albumrow -->
+	<!-- INCLUDEJS @phpbbgallery_core/js/gallery_polaroid.js -->
+<!-- ENDIF -->
