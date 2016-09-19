@@ -1,0 +1,47 @@
+.gallerypolaroid {
+	display: table;
+	max-width: 100%;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background:white;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+	box-shadow: 5px 5px 2px #888888;
+}
+
+.gallerypolaroid .polaroid_title {
+	display: table-row;
+	height-min: 10%;
+}
+
+.gallerypolaroid .polaroid_image {
+	display: table-row;
+}
+
+.gallerypolaroid .polaroid_details {
+	display: table-row;
+	height-min: 30%;
+	padding: 2px;
+}
+
+.space20 {
+	clear: both;
+    height: 20px !important;
+}
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}

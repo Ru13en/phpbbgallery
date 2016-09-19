@@ -115,6 +115,7 @@
 <!-- ENDIF -->
 
 <!-- IF S_USERS_PERSONAL_GALLERIES -->
+<div class="container-fluid">
 <div class="panel panel-default">
 	<table class="footable table table-striped table-bordered table-white table-primary table-hover">
 		<thead>
@@ -164,17 +165,18 @@
 		</tbody>
 	</table>
 </div>
+</div>
 <!-- ENDIF -->
 
 <!-- IF U_RECENT or U_RANDOM-->
 <!-- INCLUDE gallery/imageblock_polaroid.html -->
 <!-- ENDIF -->
 <!-- IF U_RECENT_COMMENTS -->
-<h2>
+<h3>
 	<a href="javascript: $('#recent-comments').toggle();">{L_SEARCH_RECENT_COMMENTS}</a>
-</h2>
+</h3>
 <!-- IF ERROR -->
-<h2>{ERROR}</h2>
+<h3>{ERROR}</h3>
 <!-- ELSE -->
 <div id="recent-comments"
 	<!-- IF COMMENTS_EXPAND -->
