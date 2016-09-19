@@ -1,6 +1,6 @@
 <!-- BEGIN imageblock -->
 <span class="clear"></span>
-<div class="row">
+<div class="row" >
 	<!-- IF imageblock.U_BLOCK --><h2><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a></h2><!-- ENDIF -->
 	<!-- IF imageblock.ERROR --><h2>{imageblock.ERROR}</h2>
 	
@@ -13,8 +13,12 @@
 					<!-- IF imageblock.image.U_IMAGE --><a href="{imageblock.image.U_IMAGE}"><!-- ENDIF -->{imageblock.image.UC_IMAGE_NAME}<!-- IF imageblock.image.U_IMAGE --></a><!-- ENDIF -->
 				</p>
 				<hr />
-				<div class="img-thumbnail center-block" id="thumbnail">
-				<!-- IF imageblock.image.UC_THUMBNAIL_ACTION --><a href="{imageblock.image.UC_THUMBNAIL_ACTION}"><!-- ENDIF --><img class="img-responsive center-block" src="{imageblock.image.UC_THUMBNAIL}" alt="{imageblock.image.UC_IMAGE_NAME}" title="{imageblock.image.UC_IMAGE_NAME}" /><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --></a><!-- ENDIF -->
+				<div style="display:table;margin-right:auto;margin-left:auto;height:180px;width:230px;">
+					<div style="display:table-cell;vertical-align:middle;text-align:center;" id="thumbnail">
+						<div class="img-thumbnail" id="thumbnail">
+						<!-- IF imageblock.image.UC_THUMBNAIL_ACTION --><a href="{imageblock.image.UC_THUMBNAIL_ACTION}"><!-- ENDIF --><img class="img-responsive center-block" src="{imageblock.image.UC_THUMBNAIL}" alt="{imageblock.image.UC_IMAGE_NAME}" title="{imageblock.image.UC_IMAGE_NAME}" /><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --></a><!-- ENDIF -->
+						</div>
+					</div>
 				</div>
 				<hr />
 				<!-- IF imageblock.image.U_ALBUM -->{L_ALBUM_NAME}{L_COLON} <a href="{imageblock.image.U_ALBUM}" style="font-weight: bold;" title="{imageblock.image.ALBUM_NAME}">{imageblock.image.ALBUM_NAME}</a><br /><!-- ENDIF -->

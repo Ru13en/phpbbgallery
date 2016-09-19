@@ -10,20 +10,21 @@
 		</div>
 	<!-- ENDIF -->
 
-	<div class="clearfix">
-		<ul class="pager">
-			<!-- IF UC_PREV_IMAGE --><li class="previous">{UC_PREV_IMAGE}</li><!-- ENDIF -->
-			<!-- IF UC_NEXT_IMAGE --><li class="next">{UC_NEXT_IMAGE}</li><!-- ENDIF -->
-		</ul>
-	</div>
 	
-	<div class="panel panel-body text-center">
-		<!-- IF UC_IMAGE_ACTION --><a href="{UC_IMAGE_ACTION}"><!-- ENDIF --><img src="{UC_IMAGE}" alt="{IMAGE_NAME}" class="postimage"/><!-- IF UC_IMAGE_ACTION --></a><!-- ENDIF -->
+
+	<div class="panel panel-body thumbnail center-block">
+		<ul class="pager">
+		<!-- IF UC_PREV_IMAGE --><li class="previous">{UC_PREV_IMAGE}</li><!-- ENDIF -->
+		<!-- IF UC_IMAGE_ACTION --><li class=""><a href="{UC_IMAGE_ACTION}"><!-- ENDIF --><img src="{UC_IMAGE}" alt="{IMAGE_NAME}" class="postimage"/><!-- IF UC_IMAGE_ACTION --></a></li><!-- ENDIF -->
+		<!-- IF UC_NEXT_IMAGE --><li class="next">{UC_NEXT_IMAGE}</li><!-- ENDIF -->
+		</ul>
 		<!-- IF IMAGE_DESC -->
 		<div class="space10"></div>
 		<div class="postbody"><div class="content">{IMAGE_DESC}</div></div>
 		<!-- ENDIF -->
+
 	</div>
+	
 
 </div>
 
