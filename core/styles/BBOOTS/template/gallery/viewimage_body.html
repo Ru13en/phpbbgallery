@@ -10,22 +10,18 @@
 		</div>
 	<!-- ENDIF -->
 
-	
-
-	<div class="panel panel-body thumbnail center-block">
-		<ul class="pager">
-		<!-- IF UC_PREV_IMAGE --><li class="previous">{UC_PREV_IMAGE}</li><!-- ENDIF -->
-		<!-- IF UC_IMAGE_ACTION --><li class=""><a href="{UC_IMAGE_ACTION}"><!-- ENDIF --><img src="{UC_IMAGE}" alt="{IMAGE_NAME}" class="postimage"/><!-- IF UC_IMAGE_ACTION --></a></li><!-- ENDIF -->
-		<!-- IF UC_NEXT_IMAGE --><li class="next">{UC_NEXT_IMAGE}</li><!-- ENDIF -->
+	<div class="panel  thumbnail center-block vertical-center" style="background-color: transparent;">
+		<ul class="pager" style="display:table-row;">
+		<!-- IF UC_PREV_IMAGE --><li class="previous" style="display: table-cell;vertical-align: middle;">{UC_PREV_IMAGE}</li><!-- ENDIF -->
+		<!-- IF UC_IMAGE_ACTION --><li style="margin:10px;"><a style="padding: 5px 5px;border-radius: 5px;" href="{UC_IMAGE_ACTION}"><!-- ENDIF --><img src="{UC_IMAGE}" alt="{IMAGE_NAME}" class="postimage"/><!-- IF UC_IMAGE_ACTION --></a></li><!-- ENDIF -->
+		<!-- IF UC_NEXT_IMAGE --><li class="next vertical-center"  style="display: table-cell;vertical-align: middle;">{UC_NEXT_IMAGE}</li><!-- ENDIF -->
 		</ul>
 		<!-- IF IMAGE_DESC -->
 		<div class="space10"></div>
 		<div class="postbody"><div class="content">{IMAGE_DESC}</div></div>
 		<!-- ENDIF -->
-
 	</div>
-	
-
+	<div class="space10"></div>
 </div>
 
 <div id="details" class="well well-small">
@@ -94,16 +90,7 @@
 			<!-- ENDIF -->
 			</fieldset>
 			
-			<!-- IF .exif_value -->
-			<h3>{L_EXIF-DATA}<!-- IF not S_VIEWEXIF --> - <a href="javascript: dE('exif_data_fieldset');">{L_SHOW_EXIF}</a><!-- ENDIF --></h3>
-			<fieldset id="exif_data_fieldset"<!-- IF not S_VIEWEXIF --> style="display: none;"<!-- ENDIF -->>
-				<!-- BEGIN exif_value -->
-						<label>{exif_value.EXIF_NAME}{L_COLON}</label>
-						{exif_value.EXIF_VALUE}
-				<!-- END exif_value -->
-			</fieldset>
 			<!-- EVENT gallery_viewimage_details -->
-			<!-- ENDIF -->
 			</div>
 		
 		</div>
@@ -231,8 +218,6 @@
 	</div>	
  </div>
 	</div>	
-</div>
-
 </div>
 
 <!-- IF S_QUICK_MOD -->
