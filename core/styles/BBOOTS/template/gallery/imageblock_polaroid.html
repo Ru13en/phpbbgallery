@@ -1,7 +1,15 @@
 <!-- BEGIN imageblock -->
 <span class="clear"></span>
 <div class="row" >
-	<!-- IF imageblock.U_BLOCK --><h2><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a></h2><!-- ENDIF -->
+	<!-- IF imageblock.U_BLOCK -->
+		<!-- IF SCRIPT_NAME eq 'memberlist' -->
+		<div class="side-segment" >
+			<h3><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a></h3>
+		</div>
+		<!-- ELSE -->
+			<h2><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a></h2>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
 	<!-- IF imageblock.ERROR --><h2>{imageblock.ERROR}</h2>
 	
 	<!-- ELSE -->
