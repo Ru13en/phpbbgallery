@@ -1,5 +1,5 @@
 <!-- BEGIN imageblock -->
-<div class="well">
+<div>
 	<div class="side-segment">
 		<h3><!-- IF imageblock.U_BLOCK --><a href="{imageblock.U_BLOCK}">{imageblock.BLOCK_NAME}</a><!-- ELSE -->{imageblock.BLOCK_NAME}<!-- ENDIF --></h3>
 	</div>
@@ -8,8 +8,16 @@
 			<!-- BEGIN image -->
 			<div class="col-md-3">
 				<div class="well well-sm">
-				<!-- IF imageblock.image.U_IMAGE --><a href="{imageblock.image.U_IMAGE}"><!-- ENDIF -->{imageblock.image.UC_IMAGE_NAME}<!-- IF imageblock.image.U_IMAGE --></a><!-- ENDIF -->
-					<span class="fake-thumb2"><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --><a href="{imageblock.image.UC_THUMBNAIL_ACTION}"><!-- ENDIF --><img src="{imageblock.image.UC_THUMBNAIL}" alt="{imageblock.image.UC_IMAGE_NAME}" title="{imageblock.image.UC_IMAGE_NAME}" /><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --></a><!-- ENDIF -->
+				<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; font-size: 1.2em;">
+					<!-- IF imageblock.image.U_IMAGE --><a href="{imageblock.image.U_IMAGE}"><!-- ENDIF -->{imageblock.image.UC_IMAGE_NAME}<!-- IF imageblock.image.U_IMAGE --></a><!-- ENDIF -->
+				</p>
+				<div style="display:table;margin-right:auto;margin-left:auto;height:180px;width:230px;">
+					<div style="display:table-cell;vertical-align:middle;text-align:center;" id="thumbnail">
+						<div class="img-thumbnail" id="thumbnail">
+							<!-- IF imageblock.image.UC_THUMBNAIL_ACTION --><a href="{imageblock.image.UC_THUMBNAIL_ACTION}"><!-- ENDIF --><img class="img-responsive center-block" src="{imageblock.image.UC_THUMBNAIL}" alt="{imageblock.image.UC_IMAGE_NAME}" title="{imageblock.image.UC_IMAGE_NAME}" /><!-- IF imageblock.image.UC_THUMBNAIL_ACTION --></a><!-- ENDIF -->
+						</div>
+					</div>
+				</div>
 					<div class="clearfix details-gallery text-overflow">
 						<ul class="list-unstyled">
 							<!-- IF imageblock.image.CONTEST_RANK --><li>{L_CONTEST_RESULT}{L_COLON} <strong>{imageblock.image.CONTEST_RANK}</strong></li><!-- ENDIF -->
